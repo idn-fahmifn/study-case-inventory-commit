@@ -24,6 +24,10 @@
         <!-- Responsive datatable examples -->
         <link href="{{asset('assets/plugins/datatables/responsive.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" /> 
 
+        <!-- Dropzone css -->
+        <link href="{{asset('assets/plugins/dropzone/dist/dropzone.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{asset('assets/plugins/dropify/css/dropify.min.css')}}" rel="stylesheet">
+
 
         {{-- bootstrap --}}
         <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
@@ -227,6 +231,11 @@
         <script src="{{asset('assets/plugins/datatables/responsive.bootstrap4.min.js')}}"></script>
         <!-- Datatable init js -->
         <script src="{{asset('assets/pages/datatables.init.js')}}"></script>
+
+        <!-- Dropzone js -->
+        <script src="{{asset('assets/plugins/dropzone/dist/dropzone.js')}}"></script>
+        <script src="{{asset('assets/plugins/dropify/js/dropify.min.js')}}"></script>
+        <script src="{{asset('assets/pages/upload.init.js')}}"></script> 
 
 
         <!-- App js -->

@@ -41,8 +41,10 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="field-2" class="control-label">Nama Pengguna (Username)</label>
-                                                    <input type="text" class="form-control" name="username" required placeholder="Ex. fahmi17">
+                                                    <label for="field-2" class="control-label">Nama Pengguna
+                                                        (Username)</label>
+                                                    <input type="text" class="form-control" name="username" required
+                                                        placeholder="Ex. fahmi17">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -62,9 +64,19 @@
                                                 </div>
                                             </div>
 
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="field-1" class="control-label">Avatar</label>
+                                                    <input type="file" id="input-file-now-custom-3" class="dropify"
+                                                        data-height="500"
+                                                        data-default-file="assets/plugins/dropify/images/test-image-2.jpg" />
+
+                                                </div>
+                                            </div>
+
                                         </div>
-    
-            
+
+
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
