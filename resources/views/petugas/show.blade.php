@@ -10,7 +10,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="header-title">
-                        Data Petugas
+                        {{ $data->name }}
                     </h4>
                     <p class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, voluptatum?</p>
 
@@ -23,13 +23,15 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title">Tambah Data Petugas</h5>
+                                    <h5 class="modal-title">Ubah Data</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <form action="{{ route('petugas.store') }}" method="post" enctype="multipart/form-data">
+                                <form action="{{ route('petugas.update', $data->id) }}" method="post"
+                                    enctype="multipart/form-data">
                                     @csrf
+                                    {{ method_field('PUT') }}
                                     <div class="modal-body">
                                         <div class="row">
                                             <div class="col-md-6">
@@ -108,29 +110,30 @@
 
                     {{-- pembungkus table --}}
                     <div class="table-responsive">
-                        <table class="table table-hover" id="datatable-buttons">
-                            <thead>
-                                <th>Nama Lengkap</th>
-                                <th>Nama Pengguna (Username)</th>
-                                <th>Status Aktif</th>
-                            </thead>
-                            <tbody>
-                                @foreach ($data as $item)
-                                    @if (!$item->isAdmin)
-                                        <tr>
-                                            <td>{{ $item->name }}</td>
-                                            <td>{{ $item->username }}</td>
-                                            <td>
-                                                @if ($item->isActive)
-                                                    <span class="badge badge-success">Sudah Aktif</span>
-                                                @else
-                                                    <span class="badge badge-danger">Non-Aktif</span>
-                                                @endif
-                                            </td>
-                                        </tr>
+                        <table class="table table-hover"">
+                            <tr>
+                                <th colspan="2" class="text-center">
+                                    <img src="{{asset('storage/images/avatar/'.$data->avatar)}}" class="img-fluid" width="200px" alt="Avatar">
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>Nama Lengkap </th>
+                                <td>{{ $data->name }}</td>
+                            </tr>
+                            <tr>
+                                <th>Username </th>
+                                <td>{{ $data->username }}</td>
+                            </tr>
+                            <tr>
+                                <th>Status </th>
+                                <td>
+                                    @if ($data->isActive)
+                                        <span class="text-success">Sudah Aktif</span>
+                                    @else
+                                        <span class="text-muted">Non-Katif</span>
                                     @endif
-                                @endforeach
-                            </tbody>
+                                </td>
+                            </tr>
                         </table>
                     </div>
 
