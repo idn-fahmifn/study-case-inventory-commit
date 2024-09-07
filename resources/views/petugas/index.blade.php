@@ -116,19 +116,20 @@
                             </thead>
                             <tbody>
                                 @foreach ($data as $item)
-                                    @if (!$item->isAdmin)
-                                        <tr>
-                                            <td>{{ $item->name }}</td>
-                                            <td>{{ $item->username }}</td>
-                                            <td>
-                                                @if ($item->isActive)
-                                                    <span class="badge badge-success">Sudah Aktif</span>
-                                                @else
-                                                    <span class="badge badge-danger">Non-Aktif</span>
-                                                @endif
-                                            </td>
-                                        </tr>
-                                    @endif
+                                @if (!$item->isAdmin)
+                                    
+                                @endif
+                                    <tr>
+                                        <td>{{ $item->name }}</td>
+                                        <td>{{ $item->username }}</td>
+                                        <td>
+                                            @if ($item->isActive)
+                                                <span class="badge badge-success">Sudah Aktif</span>
+                                            @else
+                                                <span class="badge badge-danger">Non-Aktif</span>
+                                            @endif
+                                        </td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>

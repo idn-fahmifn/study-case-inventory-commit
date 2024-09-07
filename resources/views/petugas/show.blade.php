@@ -37,29 +37,35 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="field-1" class="control-label">Nama Lengkap</label>
-                                                    <input type="text" class="form-control" name="name" required
-                                                        placeholder="Fahmi Nuradi">
+                                                    <input type="text" class="form-control" name="name"
+                                                        value="{{ $data->name }}" required placeholder="Fahmi Nuradi">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="field-2" class="control-label">Nama Pengguna
                                                         (Username)</label>
-                                                    <input type="text" class="form-control" name="username" required
-                                                        placeholder="Ex. fahmi17">
+                                                    <input type="text" class="form-control" name="username"
+                                                        value="{{ $data->username }}" required placeholder="Ex. fahmi17">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="field-1" class="control-label">Password</label>
-                                                    <input type="password" class="form-control" name="password" required>
+                                                    <input type="password" class="form-control" name="password">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="field-2" class="control-label">Status Akun</label>
                                                     <select name="isActive" class="form-control">
-                                                        <option value="">-Pilih Status Akun-</option>
+                                                        <option value="{{ $data->isActive }}">
+                                                            @if ($data->isActive)
+                                                                Sudah Aktif
+                                                            @else
+                                                                Belum Aktif
+                                                            @endif
+                                                        </option>
                                                         <option value="1">Aktif</option>
                                                         <option value="0">Non-Aktif</option>
                                                     </select>
@@ -71,7 +77,7 @@
                                                     <label for="field-1" class="control-label">Avatar</label>
                                                     <input type="file" id="input-file-now-custom-3" name="avatar"
                                                         class="dropify" data-height="300"
-                                                        data-default-file="{{ asset('storage/images/avatar/avatar.png') }}" />
+                                                        data-default-file="{{ asset('storage/images/avatar/'.$data->avatar) }}" />
                                                 </div>
                                             </div>
                                         </div>
@@ -113,7 +119,8 @@
                         <table class="table table-hover"">
                             <tr>
                                 <th colspan="2" class="text-center">
-                                    <img src="{{asset('storage/images/avatar/'.$data->avatar)}}" class="img-fluid" width="200px" alt="Avatar">
+                                    <img src="{{ asset('storage/images/avatar/' . $data->avatar) }}" class="img-fluid"
+                                        width="200px" alt="Avatar">
                                 </th>
                             </tr>
                             <tr>

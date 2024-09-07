@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -65,9 +67,37 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $data = User::find($id);
+        $request->validate([
+            'name' => 'required|max:255|string',
+            'username' => 'required|max:255|string|unique:users',
+            'avatar' => 'mimes:png,jpg,jpeg|max:5480|'
+        ]);
+
+        if($request->input('password'))
+        {
+            $input['password'] = bcrypt($request->input('password'));
+        } else 
+        {
+            $input = Arr::except($input, ['password']);
+        }
+
+        if($request->hasFile('avatar'))
+        {
+            $gambar = $request->file('avatar');
+            $extension = $gambar->getClientOriginalExtension();
+            $path_destination = 'public/images/avatar';
+            $name = 'avatar_'.Carbon::now()->format('Ymd_his').'.'.$extension;
+            $path = $request->file('avatar')->storeAs($path_destination, $name);
+            $input['avatar'] = $name;
+            Storage::delete('public/images/avatar/'.$data->avatar);
+        }
+
+        $data->update($input);
+        return redirect()->route('petugas.index');
     }
 
     /**
