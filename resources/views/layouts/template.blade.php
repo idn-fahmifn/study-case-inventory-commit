@@ -34,6 +34,10 @@
         <link href="{{asset('assets/css/icons.css')}}" rel="stylesheet" type="text/css">
         <link href="{{asset('assets/css/style.css')}}" rel="stylesheet" type="text/css">
 
+        {{-- summernote --}}
+        <link href="{{asset('assets/plugins/summernote/summernote-bs4.css')}}" rel="stylesheet" />
+
+
     </head>
 
 
@@ -236,6 +240,10 @@
         <script src="{{asset('assets/plugins/dropzone/dist/dropzone.js')}}"></script>
         <script src="{{asset('assets/plugins/dropify/js/dropify.min.js')}}"></script>
         <script src="{{asset('assets/pages/upload.init.js')}}"></script> 
+
+        {{-- summernote --}}
+        <script src="{{asset('assets/plugins/summernote/summernote-bs4.min.js')}}"></script>
+        <script src="{{asset('assets/pages/summernote.init.js')}}"></script>
 
 
         <!-- App js -->

@@ -15,8 +15,8 @@ class AdminSeeder extends Seeder
     public function run(): void
     {
         $user = User::create([
-            'name' => 'usercoba',
-            'username' => 'usercoba',
+            'name' => 'admin',
+            'username' => 'administrator',
             'avatar' => 'avatar.png',
             'isAdmin' => true,
             'isActive' => true,

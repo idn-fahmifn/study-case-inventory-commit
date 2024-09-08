@@ -73,7 +73,7 @@ class UserController extends Controller
         $data = User::find($id);
         $request->validate([
             'name' => 'required|max:255|string',
-            'username' => 'required|max:255|string|unique:users',
+            'username' => 'required|max:255|string',
             'avatar' => 'mimes:png,jpg,jpeg|max:5480|'
         ]);
 
@@ -103,8 +103,10 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $data = User::find($id);
+        $data->delete();
+        return back()->with('Data Berhasil dihapus');
     }
 }

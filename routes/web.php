@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RuanganController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Middleware\AdminMiddlware;
@@ -20,6 +21,7 @@ Auth::routes();
 Route::middleware(AdminMiddlware::class)->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('petugas', UserController::class);
+    Route::resource('ruangan', RuanganController::class);
 });
 
 Route::get('dashboard-petugas', function(){
