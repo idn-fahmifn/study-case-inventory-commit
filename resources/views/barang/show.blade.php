@@ -39,7 +39,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="field-1" class="control-label">Nama Barang</label>
-                                                    <input type="text" class="form-control" value="nama_barang"
+                                                    <input type="text" class="form-control" value="{{$data->nama_barang}}"
                                                         name="nama_barang" required>
                                                 </div>
                                             </div>
@@ -71,8 +71,8 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="field-1" class="control-label">Kode Barang</label>
-                                                    <select name="kode_barang" required class="form-control">
-                                                        <option value="{{ $data->kode_barang }}">-{{ $data->kode_barang }}-
+                                                    <select name="kode_barang" class="form-control">
+                                                        <option value="">-{{ $data->kode_barang }}-
                                                         </option>
                                                         <option value="EL">Elektronik (EL)</option>
                                                         <option value="AT">Alat Tulis (AT)</option>
@@ -199,7 +199,7 @@
                                 <th>Stok </th>
                                 <td>{{ $data->stok }} {{ $data->satuan }}</td>
                                 <td rowspan="4" class="text-center">
-                                    <img src="{{ asset('storage/images/barang/' . $data->gambar) }}" class="img-fluid"
+                                    <img src="{{ asset('storage/images/barang/' . $data->gambar) }}" class="img-fluid text-center"
                                         width="300px" alt="Ruangan">
                                 </td>
                             </tr>
@@ -207,7 +207,7 @@
                                 <th>Kondisi </th>
                                 <td>
                                     @if ($data->kondisi == 'baik')
-                                        <span class="text-succes">Barang dengan kondisi baik</span>
+                                        <span class="text-success">Barang dengan kondisi baik</span>
                                     @elseif($data->kondisi == 'rusak')
                                         <span class="text-danger">Barang Dalam kondisi Rusak</span>
                                     @elseif($data->kondisi == 'dalam perbaikan')

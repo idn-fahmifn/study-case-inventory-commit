@@ -6,6 +6,8 @@ use App\Models\Barang;
 use App\Models\Ruangan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
 
 class BarangController extends Controller
 {
@@ -75,9 +77,40 @@ class BarangController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Barang $barang)
+    public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $data = Barang::find($id);
+
+
+        if($request->input('kode_barang') ){
+            //untuk kode_barang angka random
+            $rand = random_int(000000000,9999999999);
+            $input['kode_barang'] = $input['kode_barang'].$rand;
+        }else{
+           $input['kode_barang'] = $data->kode_barang;
+        }
+
+        $request->validate([
+            'nama_barang' => 'max:255|string|required',
+            'gambar' => 'mimes:jpg,jpeg,png|max:5400',
+        ]);
+        // kondisi denah
+        if($request->hasFile('gambar'))
+        {
+            $gambar = $request->file('gambar');
+            $extension = $gambar->getClientOriginalExtension();
+            $path_destination = 'public/images/barang';
+            $name = 'gambar_barang_'.Carbon::now()->format('Ymd_his').'.'.$extension;
+            $path = $request->file('gambar')->storeAs($path_destination, $name);
+            $input['denah_ruangan'] = $name;
+            Storage::delete('public/images/barang/'.$data->gambar);
+        }
+
+        // $data->update($input);
+        // return redirect()->route('ruangan.index')->with('success', 'Data berhasil diubah');
+
+        dd($input);
     }
 
     /**
