@@ -91,7 +91,7 @@ class RuanganController extends Controller
         $input = $request->all();
         $data = Ruangan::find($id);
         $request->validate([
-            'kode_ruangan' => 'max:10|string|unique:ruangan|required',
+            'kode_ruangan' => 'max:10|string|required',
             'nama_ruangan' => 'max:255|string|required',
             'foto_ruangan' => 'mimes:jpg,jpeg,png|max:5400',
             'denah_ruangan' => 'mimes:jpg,jpeg,png|max:5400',
@@ -129,8 +129,10 @@ class RuanganController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Ruangan $ruangan)
+    public function destroy($id)
     {
-        //
+        $data = Ruangan::find($id);
+        $data->delete();
+        return back()->with('success', 'Data berhasil dihapus');
     }
 }
