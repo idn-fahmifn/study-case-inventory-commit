@@ -12,4 +12,9 @@ class Barang extends Model
     protected $table = 'barang';
     protected $guarded;
 
+    public function ruangan()
+    {
+        return $this->belongsTo(Ruangan::class, 'id_ruangan');
+    }
+
 }

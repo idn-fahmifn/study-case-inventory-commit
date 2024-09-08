@@ -1,7 +1,7 @@
 @extends('layouts.template')
 
 @section('page-title')
-    Petugas
+    Barang
 @endsection
 
 @section('content')
@@ -30,70 +30,92 @@
                                 </div>
 
                                 {{-- form nya --}}
-                                <form action="{{ route('ruangan.update', $data->id) }}" method="post" enctype="multipart/form-data">
+                                <form action="{{ route('barang.update', $data->id) }}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     {{method_field('PUT')}}
                                     <div class="modal-body">
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="field-1" class="control-label">Nama Ruangan</label>
-                                                    <input type="text" class="form-control" value="{{$data->nama_ruangan}}" name="nama_ruangan" required
-                                                        placeholder="Fahmi Nuradi">
+                                                    <label for="field-1" class="control-label">Nama Barang</label>
+                                                    <input type="text" class="form-control" value="nama_barang" name="nama_barang" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="field-2" class="control-label">Nama Penanggung Jawab</label>
-                                                    <select name="id_user" class="form-control" required>
-                                                        <option value="{{ $data->id_user }}">{{ $data->user->name }}
-                                                        @foreach ($petugas as $item)
-                                                            @if (!$item->isAdmin && $item->isActive)
-                                                                <option value="{{ $item->id }}">{{ $item->name }}
-                                                                </option>
-                                                            @endif
+                                                    <label for="field-2" class="control-label">Penyimpanan</label>
+                                                    <select name="id_ruangan" class="form-control" required>
+                                                        <option value="{{ $data->id_ruangan }}">{{ $data->ruangan->nama_ruangan }}</option>
+                                                        @foreach ($ruangan as $item)
+                                                            <option value="{{ $item->id }}">{{ $item->nama_ruangan }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="field-1" class="control-label">Kode Ruangan</label>
-                                                    <input type="text" class="form-control" value="{{$data->kode_ruangan}}" name="kode_ruangan" placeholder="ex. C-101" required>
+                                                    <label for="field-1" class="control-label">Kondisi</label>
+                                                    <select name="kondisi" required class="form-control">
+                                                        <option value="{{$data->kondisi}}">-{{$data->kondisi}}-</option>
+                                                        <option value="baik">Baik</option>
+                                                        <option value="rusak">Rusak</option>
+                                                        <option value="sedang perbaikan">Sedang perbaikan</option>
+                                                        <option value="tidak digunakan">Tidak Digunakan</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="field-2" class="control-label">Ukuran</label>
-                                                    <select name="ukuran" class="form-control" required>
-                                                        <option value="{{$data->ukuran}}">
-                                                            @if($data->ukuran == 'small')
-                                                            Small (5m x 5m)
-                                                            @elseif($data->ukuran == 'medium')
-                                                            Medium (10m x 20m)
-                                                            @else 
-                                                            Large (Ruangan Besar)
-                                                            @endif
-
-                                                        </option>
-                                                        <option value="small">Small (5m x 5m)</option>
-                                                        <option value="medium">Medium (10m x 20m)</option>
-                                                        <option value="Large">Large (Ruangan Besar)</option>
+                                                    <label for="field-1" class="control-label">Kode Barang</label>
+                                                    <select name="kode_barang" required class="form-control">
+                                                        <option value="{{$data->kode_barang}}">-{{$data->kode_barang}}-</option>
+                                                        <option value="EL">Elektronik (EL)</option>
+                                                        <option value="AT">Alat Tulis (AT)</option>
+                                                        <option value="AB">Alat Berat (AB)</option>
+                                                        <option value="FT">Furniture (FT)</option>
+                                                        <option value="LG">Logistik Umum (LG)</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="field-1" class="control-label">Kategori</label>
+                                                    <select name="kategori" required class="form-control">
+                                                        <option value="{{$data->kategori}}">-{{$data->kategori}}-</option>
+                                                        <option value="Elektronik">Elektronik (EL)</option>
+                                                        <option value="Alat Tulis">Alat Tulis (AT)</option>
+                                                        <option value="Alat Berat">Alat Berat (AB)</option>
+                                                        <option value="Furniture">Furniture (FT)</option>
+                                                        <option value="LG">Logistik Umum (LG)</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="field-1" class="control-label">Stok</label>
+                                                    <input type="number" class="form-control" value="{{$data->stok}}" name="stok" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="field-1" class="control-label">Satuan</label>
+                                                    <select name="satuan" required class="form-control">
+                                                        <option value="{{$data->satuan}}">-{{$data->satuan}}-</option>
+                                                        <option value="Lembar">Lembar</option>
+                                                        <option value="Unit">Unit</option>
+                                                        <option value="Roll">Roll</option>
+                                                        <option value="Liter">Liter</option>
+                                                        <option value="Kilogram">Kilogram</option>
+                                                        <option value="Gram">Gram</option>
+                                                        <option value="Pack">Pack</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="field-1" class="control-label">Foto Ruangan</label>
-                                                    <input type="file" id="input-file-now-custom-3" value="{{$data->foto_ruangan}}" name="foto_ruangan"
-                                                        class="dropify" data-default-file="{{ asset('storage/images/ruangan/'.$data->foto_ruangan) }}" />
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label for="field-1" class="control-label">Denah Ruangan</label>
-                                                    <input type="file" id="input-file-now-custom-3" value="{{$data->denah_ruangan}}" name="denah_ruangan"
-                                                        class="dropify" data-default-file="{{ asset('storage/images/denah/'.$data->denah_ruangan) }}" />
+                                                    <label for="field-1" class="control-label">Gambar Barang</label>
+                                                    <input type="file" value="{{$data->gambar}}" id="input-file-now-custom-3" name="gambar"
+                                                        class="dropify" data-default-file="{{ asset('storage/images/barang/'.$data->gambar) }}" />
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
@@ -163,7 +185,7 @@
                             </tr>
                             <tr>
                                 <th>Nama Penanggung Jawab </th>
-                                <td>{{ $data->user->name }}</td>
+                                <td>{{ $data->ruangan->nama_ruangan }}</td>
                                 <td rowspan="2" class="text-center">
                                     <img src="{{ asset('storage/images/denah/' . $data->denah_ruangan) }}"
                                         class="img-fluid" width="150px" alt="Ruangan">

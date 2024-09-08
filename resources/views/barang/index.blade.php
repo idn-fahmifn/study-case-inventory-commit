@@ -159,19 +159,17 @@
                     <div class="table-responsive">
                         <table class="table table-hover" id="datatable-buttons">
                             <thead>
-                                <th>Kode Ruangan</th>
-                                <th>Nama Ruangan</th>
-                                <th>Penanggung Jawab</th>
+                                <th>Kode Barang</th>
+                                <th>Nama Barang</th>
+                                <th>Lokasi Simpan</th>
                                 <th>Pilihan</th>
                             </thead>
                             <tbody>
                                 @foreach ($data as $item)
-                                    @if (!$item->isAdmin)
-                                    @endif
                                     <tr>
-                                        <td>{{ $item->kode_ruangan }}</td>
-                                        <td>{{ $item->nama_ruangan }}</td>
-                                        <td>{{ $item->user->name }}</td>
+                                        <td>{{ $item->kode_barang }}</td>
+                                        <td>{{ $item->nama_barang }}</td>
+                                        <td>{{ $item->ruangan->nama_ruangan }}</td>
                                         <td>
                                             <div class="btn-group mo-mb-2">
                                                 <button type="button" class="btn btn-info dropdown-toggle"
@@ -179,10 +177,10 @@
                                                     aria-expanded="false">Pilihan</button>
                                                 <div class="dropdown-menu">
                                                     <a class="dropdown-item"
-                                                        href="{{ route('ruangan.show', $item->id) }}">Detail</a>
+                                                        href="{{ route('barang.show', $item->id) }}">Detail</a>
                                                     {{-- <a class="dropdown-item" onclick="event.preventDefault();
                                                      document.getElementById('formDelete').submit()" href="#">Hapus</a> --}}
-                                                    <form action="{{ route('ruangan.destroy', $item->id) }}"
+                                                    <form action="{{ route('barang.destroy', $item->id) }}"
                                                         id="formDelete" method="post">
                                                         @csrf
                                                         {{ method_field('DELETE') }}
@@ -197,8 +195,6 @@
                             </tbody>
                         </table>
                     </div>
-
-
                 </div>
             </div>
         </div>
